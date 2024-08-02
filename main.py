@@ -14,6 +14,6 @@ if __name__ == "__main__":
     )
     print(json.dumps(electric_request))
 
-    response = Estimates.create_estimate_request(electric_request)
-    print(response)
+    # response = Estimates.create_estimate_request(electric_request)
+    # print(response)
 
