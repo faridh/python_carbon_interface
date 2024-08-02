@@ -64,8 +64,8 @@ class Country(Enum):
         try:
             country = Country[value_copy.upper()]
             return country
-        except Exception as e:
-            raise NotImplementedError from e
+        except KeyError as e:
+            raise KeyError(f"Value '{value}' not implemented") from e
 
     def __repr__(self):
         return f"Country('{self.value[0]})'"

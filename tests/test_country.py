@@ -36,3 +36,12 @@ class TestCountry(unittest.TestCase):
         country: Country = Country.from_value('fr')
         subject: dict[str, Country] = {"country": country}
         self.assertEqual(json.dumps(subject), '{"country": "fr"}')
+
+    def test_should_throw_exception(self) -> None:
+        """
+        Tests that Country throws an exception when trying to initialize from
+        an unsupported value.
+        """
+        def test_function():
+            return Country.from_value('mx')
+        self.assertRaises(KeyError, test_function)
