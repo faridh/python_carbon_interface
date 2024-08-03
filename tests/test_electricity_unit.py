@@ -1,6 +1,7 @@
 """
 Module test_electricity_unit
 """
+
 import json
 import unittest
 

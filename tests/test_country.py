@@ -1,6 +1,7 @@
 """
 Module test_country
 """
+
 import json
 import unittest
 
@@ -16,7 +17,7 @@ class TestCountry(unittest.TestCase):
         """
         Test base case for Country creation from @staticmethod.
         """
-        subject: Country = Country.from_value('fr')
+        subject: Country = Country.from_value("fr")
         self.assertEqual(subject, Country.FR)
 
     def test_should_initialize_edge_cases(self) -> None:
@@ -33,7 +34,7 @@ class TestCountry(unittest.TestCase):
         """
         Tests that Country serializes proper to JSON.
         """
-        country: Country = Country.from_value('fr')
+        country: Country = Country.from_value("fr")
         subject: dict[str, Country] = {"country": country}
         self.assertEqual(json.dumps(subject), '{"country": "fr"}')
 
@@ -42,6 +43,8 @@ class TestCountry(unittest.TestCase):
         Tests that Country throws an exception when trying to initialize from
         an unsupported value.
         """
+
         def test_function():
-            return Country.from_value('mx')
+            return Country.from_value("mx")
+
         self.assertRaises(KeyError, test_function)

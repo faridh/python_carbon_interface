@@ -1,6 +1,7 @@
 """
 Module estimates
 """
+
 import json
 from typing import Any
 
@@ -8,6 +9,7 @@ from client import Client
 
 from .estimate_request import EstimateRequest
 from .estimate_response import EstimateResponse
+from .estimate_response_factory import EstimateResponseFactory
 
 
 class Estimates:
@@ -32,7 +34,7 @@ class Estimates:
         print(response_str)
         try:
             data: dict[str, Any] = json.loads(response_str)
-            response_object = EstimateResponse.from_json(data.get("data"))
+            response_object = EstimateResponseFactory.from_json(data.get("data"))
             return response_object
-        except IOError as io_error:
-            raise IOError("Error deserializing response from API.") from io_error
+        except Exception as exc:
+            raise Exception("Error deserializing response from API.") from exc
