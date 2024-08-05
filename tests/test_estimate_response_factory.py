@@ -1,14 +1,17 @@
 """
 Module test_estimate_response_factory
 """
+
 import unittest
 
 from estimates import (
     ElectricEstimateResponse,
+    EstimateResponse,
     EstimateResponseFactory,
     FlightEstimateResponse,
+    ShippingEstimateResponse,
 )
-from model import Country, DistanceUnit, ElectricityUnit
+from model import Country, DistanceUnit, ElectricityUnit, TransportMethod, WeightUnit
 
 
 class TestEstimateResponseFactory(unittest.TestCase):
@@ -88,3 +91,71 @@ class TestEstimateResponseFactory(unittest.TestCase):
         self.assertEqual(subject.distance_value, 7454.15)
         self.assertEqual(subject.carbon_lb, 1895.59)
         self.assertEqual(subject.carbon_mt, 0.86)
+
+    def test_should_deserialize_shipping_successfully(self) -> None:
+        """
+        Tests that EstimateResponseFactory deserializes a ShippingEstimateResponse
+        successfully.
+        """
+        sample_response = {
+            "id": "00000000-0000-0000-0000-000000000000",
+            "type": "estimate",
+            "attributes": {
+                "distance_value": "2000.0",
+                "distance_unit": "km",
+                "weight_value": "200.0",
+                "weight_unit": "g",
+                "transport_method": "truck",
+                "estimated_at": "2020-07-31T13:00:04.446Z",
+                "carbon_g": 25,
+                "carbon_lb": 0.06,
+                "carbon_kg": 0.03,
+                "carbon_mt": 0.0,
+            },
+        }
+        subject: ShippingEstimateResponse = EstimateResponseFactory.from_json(
+            sample_response
+        )
+        self.assertTrue(isinstance(subject, ShippingEstimateResponse))
+        self.assertEqual(subject.distance_unit, DistanceUnit.KM)
+        self.assertEqual(subject.distance_value, 2000.00)
+        self.assertEqual(subject.weight_unit, WeightUnit.GRAMS)
+        self.assertEqual(subject.weight_value, 200.00)
+        self.assertEqual(subject.transport_method, TransportMethod.TRUCK)
+        self.assertEqual(subject.carbon_g, 25)
+        self.assertEqual(subject.carbon_lb, 0.06)
+        self.assertEqual(subject.carbon_kg, 0.03)
+        self.assertEqual(subject.carbon_mt, 0.0)
+        self.assertEqual(subject.estimated_at.year, 2020)
+        self.assertEqual(subject.estimated_at.month, 7)
+        self.assertEqual(subject.estimated_at.day, 31)
+
+    def test_should_throw_not_implemented_error(self) -> None:
+        """
+        Tests that EstimateResponseFactory throws a NonImplementedError
+        successfully.
+        """
+
+        def test_function():
+            sample_response = {
+                "id": "00000000-0000-0000-0000-000000000000",
+                "type": "estimate",
+                "attributes": {
+                    "distance_value": 100.0,
+                    "vehicle_make": "Toyota",
+                    "vehicle_model": "Corolla",
+                    "vehicle_year": 1993,
+                    "vehicle_model_id": "7268a9b7-17e8-4c8d-acca-57059252afe9",
+                    "distance_unit": "mi",
+                    "estimated_at": "2021-01-10T15:24:32.568Z",
+                    "carbon_g": 37029,
+                    "carbon_lb": 81.64,
+                    "carbon_kg": 37.03,
+                    "carbon_mt": 0.04,
+                },
+            }
+            subject: EstimateResponse = EstimateResponseFactory.from_json(
+                sample_response
+            )
+
+        self.assertRaises(NotImplementedError, test_function)
