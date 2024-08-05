@@ -25,10 +25,10 @@ class ElectricityEstimateRequest(EstimateRequest):
 
     def __init__(
         self,
-        electricity_unit: ElectricityUnit,
-        electricity_value: float,
         country: Country,
-        state: str | None = "",
+        electricity_value: float,
+        electricity_unit: ElectricityUnit = ElectricityUnit.MWH,
+        state: str = None,
     ):
         super().__init__(EstimateType.ELECTRICITY)
         self.electricity_unit = electricity_unit
@@ -37,4 +37,4 @@ class ElectricityEstimateRequest(EstimateRequest):
         self.state = state
 
     def __json__(self) -> dict[str, Any]:
-        return self.__dict__
+        return {k: v for k, v in self.__dict__.items() if v is not None}

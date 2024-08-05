@@ -21,13 +21,13 @@ class FlightEstimateRequest(EstimateRequest):
 
     passengers: int
     legs: list[FlightLeg]
-    distance_unit: DistanceUnit | None
+    distance_unit: DistanceUnit
 
     def __init__(
         self,
         passengers: int,
         legs: list[FlightLeg],
-        distance_unit: DistanceUnit | None,
+        distance_unit: DistanceUnit | None = DistanceUnit.KM,
     ):
         super().__init__(EstimateType.FLIGHT)
         self.passengers = passengers
@@ -35,4 +35,4 @@ class FlightEstimateRequest(EstimateRequest):
         self.distance_unit = distance_unit
 
     def __json__(self) -> dict[str, Any]:
-        return self.__dict__
+        return {k: v for k, v in self.__dict__.items() if v is not None}
