@@ -8,6 +8,7 @@ from typing import Any
 from .electricity_estimate_response import ElectricEstimateResponse
 from .estimate_response import EstimateResponse
 from .flight_estimate_response import FlightEstimateResponse
+from .shipping_estimate_response import ShippingEstimateResponse
 
 
 class EstimateResponseFactory:
@@ -29,5 +30,7 @@ class EstimateResponseFactory:
             return ElectricEstimateResponse(data)
         if "passengers" in attributes:
             return FlightEstimateResponse(data)
+        if "weight_value" in attributes:
+            return ShippingEstimateResponse(data)
 
         raise NotImplementedError(f"Response type not implemented {json.dumps(data)}.")

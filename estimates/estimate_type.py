@@ -14,6 +14,7 @@ class EstimateType(Enum):
 
     ELECTRICITY = "electricity"
     FLIGHT = "flight"
+    SHIPPING = "shipping"
 
     def __json__(self) -> str:
         return self.name.lower()
