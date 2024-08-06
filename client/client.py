@@ -15,7 +15,7 @@ class Client:
     Carbon Interface API over standard HTTP methods such as GET, POST.
     """
 
-    DEFAULT_TIMEOUT: int = 2
+    DEFAULT_TIMEOUT: int = 10
     instance = None
 
     def __init__(self):
@@ -33,6 +33,20 @@ class Client:
         if not hasattr(cls, "instance") or not cls.instance:
             cls.instance = super(Client, cls).__new__(cls)
         return cls.instance
+
+    def get(self, endpoint: str) -> str:
+        """
+        Executes a GET call to Carbon Interface API.
+        :param endpoint: the final endpoint for the request, i.e.: 'estimates'
+        :return:
+        """
+        full_api_url: str = f"{self.__api_base_url}/{endpoint}"
+        response = requests.get(
+            full_api_url,
+            headers=self.__default_headers,
+            timeout=Client.DEFAULT_TIMEOUT,
+        )
+        return response.text
 
     def post(self, endpoint: str, data: BaseRequest) -> str:
         """

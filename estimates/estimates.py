@@ -18,6 +18,8 @@ class Estimates:
     from Carbon Interface API.
     """
 
+    client: Client = Client()
+
     def __init__(self):
         pass
 
@@ -27,14 +29,13 @@ class Estimates:
         Creates an EstimateRequest against Carbon Interface API.
         :param request: the EstimateRequest object to send.
         :return: an EstimateResponse.
-        :except: IOError if there's a problem when deserializing the response.
+        :except: RuntimeError if there's a problem when deserializing the response.
         """
-        client = Client()
-        response_str: str = client.post("estimates", request)
-        print(response_str)
+
+        response_str: str = cls.client.post("estimates", request)
         try:
             data: dict[str, Any] = json.loads(response_str)
             response_object = EstimateResponseFactory.from_json(data.get("data"))
             return response_object
         except Exception as exc:
-            raise Exception("Error deserializing response from API.") from exc
+            raise RuntimeError("Error deserializing response from API.") from exc
