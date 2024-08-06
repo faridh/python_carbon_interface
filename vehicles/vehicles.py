@@ -44,7 +44,8 @@ class Vehicles:
         :return: a list of `VehicleModel` objects.
         :except: RuntimeError if there's a problem when deserializing the response.
         """
-        response_str: str = cls.client.get(
+        client: Client = Client()
+        response_str: str = client.get(
             f"vehicle_makes/{vehicle_make_id}/vehicle_models"
         )
         print(response_str)
