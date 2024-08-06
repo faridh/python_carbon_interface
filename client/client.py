@@ -19,7 +19,8 @@ class Client:
     instance = None
 
     def __init__(self):
-        if os.getenv("CARBON_INTERFACE_API_KEY") is None:
+        api_key: str | None = os.getenv("CARBON_INTERFACE_API_KEY")
+        if not api_key:
             raise RuntimeError("CARBON_INTERFACE_API_KEY is not defined")
         self.__api_key = os.getenv("CARBON_INTERFACE_API_KEY")
         self.__api_base_url = "https://www.carboninterface.com/api/v1"
