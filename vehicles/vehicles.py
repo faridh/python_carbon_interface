@@ -16,8 +16,6 @@ class Vehicles:
     from Carbon Interface API.
     """
 
-    client: Client = Client()
-
     def __init__(self):
         pass
 
@@ -28,7 +26,8 @@ class Vehicles:
         :return: a list of `VehicleMake` objects.
         :except: RuntimeError if there's a problem when deserializing the response.
         """
-        response_str: str = cls.client.get("vehicle_makes")
+        client: Client = Client()
+        response_str: str = client.get("vehicle_makes")
         try:
             data: list[dict[str, Any]] = json.loads(response_str)
             response = [VehicleMake(d.get("data")) for d in data]
