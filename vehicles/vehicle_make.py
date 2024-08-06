@@ -1,9 +1,11 @@
 """
 Module vehicle_make
 """
+from dataclasses import dataclass
 from typing import Any
 
 
+@dataclass
 class VehicleMake:
     """
     Class that represents a VehicleMake instance.
