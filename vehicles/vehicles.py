@@ -3,11 +3,13 @@ Module vehicles
 """
 
 import json
+from json import JSONDecodeError
 from typing import Any
 
 from client import Client
-from .vehicle_model import VehicleModel
+
 from .vehicle_make import VehicleMake
+from .vehicle_model import VehicleModel
 
 
 class Vehicles:
@@ -15,9 +17,6 @@ class Vehicles:
     Class that provides methods to interact against the "/vehicle_makes" endpoint
     from Carbon Interface API.
     """
-
-    def __init__(self):
-        pass
 
     @classmethod
     def get_vehicle_makes(cls) -> list[VehicleMake]:
@@ -32,7 +31,7 @@ class Vehicles:
             data: list[dict[str, Any]] = json.loads(response_str)
             response = [VehicleMake(d.get("data")) for d in data]
             return response
-        except Exception as exc:
+        except JSONDecodeError as exc:
             raise RuntimeError("Error deserializing response from API.") from exc
 
     @classmethod
@@ -53,5 +52,5 @@ class Vehicles:
             data: list[dict[str, Any]] = json.loads(response_str)
             response = [VehicleModel(d.get("data")) for d in data]
             return response
-        except Exception as exc:
+        except JSONDecodeError as exc:
             raise RuntimeError("Error deserializing response from API.") from exc

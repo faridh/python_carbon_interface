@@ -1,6 +1,7 @@
 """
 Module vehicle_model
 """
+
 from dataclasses import dataclass
 from typing import Any
 
