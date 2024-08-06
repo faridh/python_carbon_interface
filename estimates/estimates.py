@@ -3,6 +3,7 @@ Module estimates
 """
 
 import json
+from json import JSONDecodeError
 from typing import Any
 
 from client import Client
@@ -35,5 +36,5 @@ class Estimates:
             data: dict[str, Any] = json.loads(response_str)
             response_object = EstimateResponseFactory.from_json(data.get("data"))
             return response_object
-        except Exception as exc:
+        except JSONDecodeError as exc:
             raise RuntimeError("Error deserializing response from API.") from exc
