@@ -1,7 +1,7 @@
 """
 Module test_vehicles
 """
-
+import os
 from unittest import TestCase, mock
 
 from vehicles import VehicleMake, Vehicles
@@ -12,6 +12,7 @@ class TestVehicles(TestCase):
     UTs for vehicles module.
     """
 
+    @mock.patch.dict(os.environ, {"CARBON_INTERFACE_API_KEY": "someApiKey"})
     @mock.patch("vehicles.vehicles.Client.get")
     def test_should_get_vehicle_makes_successfully(self, mock_client) -> None:
         """
@@ -31,6 +32,7 @@ class TestVehicles(TestCase):
         self.assertEqual(response_object.name, "Alfa Romeo")
         self.assertEqual(response_object.number_of_models, 69)
 
+    @mock.patch.dict(os.environ, {"CARBON_INTERFACE_API_KEY": "someApiKey"})
     @mock.patch("vehicles.vehicles.Client.get")
     def test_should_raise_error_when_malformed_response(self, mock_client) -> None:
         """
