@@ -4,11 +4,14 @@ Module test_estimate_response_factory
 
 import unittest
 
-from estimates import (ElectricEstimateResponse, EstimateResponse,
-                       EstimateResponseFactory, FlightEstimateResponse,
-                       ShippingEstimateResponse)
-from model import (Country, DistanceUnit, ElectricityUnit, TransportMethod,
-                   WeightUnit)
+from estimates import (
+    ElectricEstimateResponse,
+    EstimateResponse,
+    EstimateResponseFactory,
+    FlightEstimateResponse,
+    ShippingEstimateResponse,
+)
+from model import Country, DistanceUnit, ElectricityUnit, TransportMethod, WeightUnit
 
 
 class TestEstimateResponseFactory(unittest.TestCase):
