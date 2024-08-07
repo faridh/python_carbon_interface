@@ -2,11 +2,13 @@
 Module estimate_response
 """
 
+from dataclasses import dataclass
 from datetime import datetime
 from typing import Any
 from uuid import UUID
 
 
+@dataclass
 class EstimateResponse:
     """
     Class that represents a generic response from Carbon Interface API when

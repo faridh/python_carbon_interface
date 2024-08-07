@@ -9,10 +9,19 @@ from estimates import (
     ElectricEstimateResponse,
     EstimateResponseFactory,
     FlightEstimateResponse,
+    FuelCombustionEstimateResponse,
     ShippingEstimateResponse,
     VehicleEstimateResponse,
 )
-from model import Country, DistanceUnit, ElectricityUnit, TransportMethod, WeightUnit
+from model import (
+    Country,
+    DistanceUnit,
+    ElectricityUnit,
+    FuelSourceType,
+    FuelSourceUnit,
+    TransportMethod,
+    WeightUnit,
+)
 
 
 class TestEstimateResponseFactory(unittest.TestCase):
@@ -171,6 +180,39 @@ class TestEstimateResponseFactory(unittest.TestCase):
         self.assertEqual(subject.carbon_kg, 37.03)
         self.assertEqual(subject.carbon_mt, 0.04)
 
+    def test_should_deserialize_fuel_successfully(self) -> None:
+        """
+        Tests that EstimateResponseFactory deserializes a FuelCombustionEstimateResponse
+        successfully.
+        """
+        sample_response = {
+            "id": "00000000-0000-0000-0000-000000000000",
+            "type": "estimate",
+            "attributes": {
+                "fuel_source_type": "dfo",
+                "fuel_source_unit": "btu",
+                "fuel_source_value": 2,
+                "estimated_at": "2020-07-24T02:23:24.441Z",
+                "carbon_g": 146320,
+                "carbon_lb": 322.58,
+                "carbon_kg": 146.32,
+                "carbon_mt": 0.15,
+            },
+        }
+        subject: FuelCombustionEstimateResponse = EstimateResponseFactory.from_json(
+            sample_response
+        )
+        self.assertTrue(isinstance(subject, FuelCombustionEstimateResponse))
+        self.assertEqual(subject.id, UUID("00000000-0000-0000-0000-000000000000"))
+        self.assertEqual(
+            subject.fuel_source_type, FuelSourceType.HOME_HEATING_DIESEL_FUEL
+        )
+        self.assertEqual(subject.fuel_source_unit, FuelSourceUnit.BTU)
+        self.assertEqual(subject.fuel_source_value, 2)
+        self.assertEqual(subject.carbon_lb, 322.58)
+        self.assertEqual(subject.carbon_kg, 146.32)
+        self.assertEqual(subject.carbon_mt, 0.15)
+
     def test_should_throw_not_implemented_error(self) -> None:
         """
         Tests that EstimateResponseFactory throws a NonImplementedError
@@ -182,9 +224,7 @@ class TestEstimateResponseFactory(unittest.TestCase):
                 "id": "2d968fce-859d-4dc1-9489-987e795f42bb",
                 "type": "estimate",
                 "attributes": {
-                    "fuel_source_type": "dfo",
-                    "fuel_source_unit": "btu",
-                    "fuel_source_value": 2,
+                    "new_attribute": "new",
                     "estimated_at": "2020-07-24T02:23:24.441Z",
                     "carbon_g": 146320,
                     "carbon_lb": 322.58,
