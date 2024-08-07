@@ -13,7 +13,7 @@ from .estimate_response import EstimateResponse
 @dataclass
 class ShippingEstimateResponse(EstimateResponse):
     """
-    Class that represents a shipping estimate response from Carbon Interface API when
+    Class that represents a shipping estimate response from CarbonInterface API when
     creating an EstimateRequest.
     """
 
@@ -26,8 +26,8 @@ class ShippingEstimateResponse(EstimateResponse):
     def __init__(self, data: dict[str, Any]):
         super().__init__(data)
         attributes: dict[str, Any] = data.get("attributes")
-        self.distance_unit = DistanceUnit(attributes.get("distance_unit"))
-        self.distance_value = float(attributes.get("distance_value"))
-        self.weight_unit = WeightUnit(attributes.get("weight_unit"))
-        self.weight_value = float(attributes.get("weight_value"))
-        self.transport_method = TransportMethod(attributes.get("transport_method"))
+        self.distance_unit: DistanceUnit = DistanceUnit(attributes.get("distance_unit"))
+        self.distance_value: float = float(attributes.get("distance_value"))
+        self.weight_unit: WeightUnit = WeightUnit(attributes.get("weight_unit"))
+        self.weight_value: float = float(attributes.get("weight_value"))
+        self.transport_method: TransportMethod = TransportMethod(attributes.get("transport_method"))

@@ -163,7 +163,7 @@ class TestEstimateResponseFactory(unittest.TestCase):
         self.assertEqual(subject.vehicle_model, "Corolla")
         self.assertEqual(subject.vehicle_year, 1993)
         self.assertEqual(
-            subject.vehicle_model_id, "00000000-0000-0000-0000-000000000000"
+            subject.vehicle_model_id, UUID("00000000-0000-0000-0000-000000000000")
         )
         self.assertEqual(subject.distance_unit, DistanceUnit.MI)
         self.assertEqual(subject.carbon_g, 37029)

@@ -27,7 +27,7 @@ class FuelSourceType(Enum):
     WASTE_OIL = "wo"
 
     def __repr__(self):
-        return f"ElectricityUnit('{self.value}')"
+        return f"FuelSourceType('{self.value}')"
 
     def __str__(self):
         return self.__repr__()

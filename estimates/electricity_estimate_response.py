@@ -13,7 +13,7 @@ from .estimate_response import EstimateResponse
 @dataclass
 class ElectricEstimateResponse(EstimateResponse):
     """
-    Class that represents an electricity estimate response from Carbon Interface API when
+    Class that represents an electricity estimate response from CarbonInterface API when
     creating an EstimateRequest.
     """
 

@@ -14,7 +14,7 @@ from .flight_leg import FlightLeg
 @dataclass
 class FlightEstimateResponse(EstimateResponse):
     """
-    Class that represents an electricity estimate response from Carbon Interface API when
+    Class that represents a flight estimate response from CarbonInterface API when
     creating an EstimateRequest.
     """
 
