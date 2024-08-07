@@ -68,7 +68,7 @@ class Country(Enum):
             raise KeyError(f"Value '{value}' not implemented") from e
 
     def __repr__(self):
-        return f"Country('{self.value[0]})'"
+        return f"Country('{self.value[0]}')"
 
     def __str__(self):
         return self.__repr__()

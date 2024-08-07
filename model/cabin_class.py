@@ -15,5 +15,11 @@ class CabinClass(Enum):
     ECONOMY = "economy"
     PREMIUM = "premium"
 
+    def __repr__(self):
+        return f"CabinClass('{self.value}')"
+
+    def __str__(self):
+        return self.__repr__()
+
     def __json__(self) -> str:
         return self.value
