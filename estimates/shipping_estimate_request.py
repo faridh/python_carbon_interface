@@ -2,10 +2,6 @@
 Module shipping_estimate_request
 """
 
-from typing import Any
-
-import json_fix
-
 from model import DistanceUnit, TransportMethod, WeightUnit
 
 from .estimate_request import EstimateRequest
@@ -38,6 +34,3 @@ class ShippingEstimateRequest(EstimateRequest):
         self.distance_unit = distance_unit
         self.distance_value = distance_value
         self.transport_method = transport_method
-
-    def __json__(self) -> dict[str, Any]:
-        return {k: v for k, v in self.__dict__.items() if v is not None}

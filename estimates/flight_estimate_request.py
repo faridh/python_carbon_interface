@@ -2,10 +2,6 @@
 Module flight_estimate_request
 """
 
-from typing import Any
-
-import json_fix
-
 from model import DistanceUnit
 
 from .estimate_request import EstimateRequest
@@ -33,6 +29,3 @@ class FlightEstimateRequest(EstimateRequest):
         self.passengers = passengers
         self.legs = legs
         self.distance_unit = distance_unit
-
-    def __json__(self) -> dict[str, Any]:
-        return {k: v for k, v in self.__dict__.items() if v is not None}
