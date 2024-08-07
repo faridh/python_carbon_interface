@@ -1,6 +1,7 @@
 """
 Module test_vehicles
 """
+
 import os
 from unittest import TestCase, mock
 
@@ -38,11 +39,17 @@ class TestVehicles(TestCase):
         Tests that the `vehicles` module raises an exception when it can't parse
         the response from the `/vehicle_makes` endpoint.
         """
+
         mock_client.return_value = "not json data"
         self.assertRaises(RuntimeError, Vehicles.get_vehicle_makes)
 
     @mock.patch("vehicles.vehicles.Client.get")
     def test_should_get_vehicle_models_successfully(self, mock_client) -> None:
+        """
+        Tests that the vehicles module can parse successfully the response from
+        the `/vehicle_makes/{id}/vehicle_models` endpoint.
+        """
+
         mock_client.return_value = """
         [{"data":{"id":"00000000-0000-0000-0000-000000000000",
         "attributes":{"name":"Taurus","year":1993,"vehicle_make":"Ford"}}}]
@@ -59,7 +66,8 @@ class TestVehicles(TestCase):
     def test_should_raise_error_when_vehicle_models_error(self, mock_client) -> None:
         """
         Tests that the `vehicles` module raises an exception when it can't parse
-        the response from the `/vehicle_makes` endpoint.
+        the response from the `/vehicle_makes/{id}/vehicle_models` endpoint.
         """
+
         mock_client.return_value = "not json data"
         self.assertRaises(RuntimeError, lambda: Vehicles.get_vehicle_models("id"))

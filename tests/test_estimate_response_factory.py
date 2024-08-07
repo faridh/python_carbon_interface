@@ -154,8 +154,6 @@ class TestEstimateResponseFactory(unittest.TestCase):
                     "carbon_mt": 0.04,
                 },
             }
-            subject: EstimateResponse = EstimateResponseFactory.from_json(
-                sample_response
-            )
+            EstimateResponseFactory.from_json(sample_response)
 
         self.assertRaises(NotImplementedError, test_function)
