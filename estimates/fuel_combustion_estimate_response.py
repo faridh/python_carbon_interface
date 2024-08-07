@@ -6,6 +6,7 @@ from dataclasses import dataclass
 from typing import Any
 
 from model import FuelSourceType, FuelSourceUnit
+
 from .estimate_response import EstimateResponse
 
 

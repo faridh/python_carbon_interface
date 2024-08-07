@@ -30,4 +30,6 @@ class ShippingEstimateResponse(EstimateResponse):
         self.distance_value: float = float(attributes.get("distance_value"))
         self.weight_unit: WeightUnit = WeightUnit(attributes.get("weight_unit"))
         self.weight_value: float = float(attributes.get("weight_value"))
-        self.transport_method: TransportMethod = TransportMethod(attributes.get("transport_method"))
+        self.transport_method: TransportMethod = TransportMethod(
+            attributes.get("transport_method")
+        )
