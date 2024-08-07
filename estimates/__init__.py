@@ -14,3 +14,5 @@ from .flight_estimate_response import FlightEstimateResponse
 from .flight_leg import FlightLeg
 from .shipping_estimate_request import ShippingEstimateRequest
 from .shipping_estimate_response import ShippingEstimateResponse
+from .vehicle_estimate_request import VehicleEstimateRequest
+from .vehicle_estimate_response import VehicleEstimateResponse
