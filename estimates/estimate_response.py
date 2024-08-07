@@ -4,6 +4,7 @@ Module estimate_response
 
 from datetime import datetime
 from typing import Any
+from uuid import UUID
 
 
 class EstimateResponse:
@@ -12,7 +13,7 @@ class EstimateResponse:
     creating an EstimateRequest.
     """
 
-    id: str
+    id: UUID
     type: str
     estimated_at: datetime
     carbon_g: float
@@ -21,7 +22,7 @@ class EstimateResponse:
     carbon_mt: float
 
     def __init__(self, data: dict[str, Any]):
-        self.id: str = data.get("id")
+        self.id: UUID = UUID(data.get("id"))
         self.type: str = data.get("type")
         attributes: dict[str, Any] = data.get("attributes")
         self.estimated_at: datetime = datetime.strptime(
