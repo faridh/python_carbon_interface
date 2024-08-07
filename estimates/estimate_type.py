@@ -16,6 +16,7 @@ class EstimateType(Enum):
     FLIGHT = "flight"
     SHIPPING = "shipping"
     VEHICLE = "vehicle"
+    FUEL_COMBUSTION = "fuel_combustion"
 
     def __json__(self) -> str:
         return self.value

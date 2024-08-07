@@ -1,5 +1,5 @@
 """
-Module fuel_unit
+Module fuel_source_unit
 """
 
 from enum import Enum
@@ -7,9 +7,9 @@ from enum import Enum
 import json_fix
 
 
-class FuelUnit(Enum):
+class FuelSourceUnit(Enum):
     """
-    FuelUnit enum-model to represent valid fuel units.
+    FuelSourceUnit enum-model to represent valid fuel units.
     """
 
     SHORT_TON = "short_ton"
@@ -19,7 +19,7 @@ class FuelUnit(Enum):
     BTU = "btu"
 
     def __repr__(self):
-        return f"FuelUnit('{self.value}')"
+        return f"FuelSourceUnit('{self.value}')"
 
     def __str__(self):
         return self.__repr__()

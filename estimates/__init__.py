@@ -12,6 +12,7 @@ from .estimates import Estimates
 from .flight_estimate_request import FlightEstimateRequest
 from .flight_estimate_response import FlightEstimateResponse
 from .flight_leg import FlightLeg
+from .fuel_combustion_estimate_request import FuelCombustionEstimateRequest
 from .shipping_estimate_request import ShippingEstimateRequest
 from .shipping_estimate_response import ShippingEstimateResponse
 from .vehicle_estimate_request import VehicleEstimateRequest

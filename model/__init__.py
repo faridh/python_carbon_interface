@@ -7,6 +7,6 @@ from .country import Country
 from .distance_unit import DistanceUnit
 from .electricity_unit import ElectricityUnit
 from .fuel_source_type import FuelSourceType
-from .fuel_unit import FuelUnit
+from .fuel_source_unit import FuelSourceUnit
 from .transport_method import TransportMethod
 from .weight_unit import WeightUnit
