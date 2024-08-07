@@ -5,6 +5,7 @@ Module test_estimates
 import os
 from datetime import datetime
 from unittest import TestCase, mock
+from uuid import UUID
 
 from estimates import (
     ElectricEstimateResponse,
@@ -44,7 +45,7 @@ class TestEstimates(TestCase):
         )
         self.assertTrue(isinstance(subject, ElectricEstimateResponse))
         self.assertTrue(issubclass(subject.__class__, EstimateResponse))
-        self.assertEqual(subject.id, "00000000-0000-0000-0000-000000000000")
+        self.assertEqual(subject.id, UUID("00000000-0000-0000-0000-000000000000"))
         self.assertEqual(subject.country, Country.US)
         self.assertEqual(subject.state, "fl")
         self.assertEqual(subject.electricity_unit, ElectricityUnit.MWH)
