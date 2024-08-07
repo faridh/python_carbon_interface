@@ -4,7 +4,7 @@ Module estimates
 
 import json
 from json import JSONDecodeError
-from typing import Any
+from typing import Any, TypeVar
 
 from client import Client
 
@@ -19,11 +19,10 @@ class Estimates:
     from Carbon Interface API.
     """
 
-    def __init__(self):
-        pass
+    T = TypeVar("T", bound=EstimateResponse)
 
     @classmethod
-    def create_estimate_request(cls, request: EstimateRequest) -> EstimateResponse:
+    def create_estimate_request(cls, request: EstimateRequest) -> T:
         """
         Creates an EstimateRequest against Carbon Interface API.
         :param request: the EstimateRequest object to send.

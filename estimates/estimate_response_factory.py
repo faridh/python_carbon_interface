@@ -3,7 +3,7 @@ Module estimate_response_factory
 """
 
 import json
-from typing import Any
+from typing import Any, TypeVar
 
 from .electricity_estimate_response import ElectricEstimateResponse
 from .estimate_response import EstimateResponse
@@ -16,9 +16,10 @@ class EstimateResponseFactory:
     Class that determines which response subtype is appropriate to initialize
     given the API response.
     """
+    T: TypeVar = TypeVar("T", bound=EstimateResponse)
 
     @staticmethod
-    def from_json(data: dict[str, Any]) -> EstimateResponse:
+    def from_json(data: dict[str, Any]) -> T:
         """
         Deserializes an EstimateResponse instance based on
         the contents of data
