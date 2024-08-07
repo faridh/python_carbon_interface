@@ -18,4 +18,4 @@ class EstimateType(Enum):
     VEHICLE = "vehicle"
 
     def __json__(self) -> str:
-        return self.name.lower()
+        return self.value
