@@ -16,6 +16,7 @@ class EstimateResponseFactory:
     Class that determines which response subtype is appropriate to initialize
     given the API response.
     """
+
     T: TypeVar = TypeVar("T", bound=EstimateResponse)
 
     @staticmethod
