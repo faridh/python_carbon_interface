@@ -26,11 +26,11 @@ class FlightLeg:
     ):
         if len(departure_airport) != 3:
             raise ValueError(
-                f"IATA code length should be 3 characters ({departure_airport})"
+                f"IATA code length should be 3 characters ({departure_airport=})"
             )
         if len(destination_airport) != 3:
             raise ValueError(
-                f"IATA code length should be 3 characters ({destination_airport})"
+                f"IATA code length should be 3 characters ({destination_airport=})"
             )
 
         self.departure_airport = departure_airport.lower()

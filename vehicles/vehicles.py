@@ -23,7 +23,7 @@ class Vehicles:
         """
         Gets the list of `VehicleMake` available via CarbonInterface API.
         :return: a list of `VehicleMake` objects.
-        :except: RuntimeError if there's a problem when deserializing the response.
+        :raises: RuntimeError if there's a problem when deserializing the response.
         """
         client: Client = Client()
         response_str: str = client.get("vehicle_makes")
@@ -41,7 +41,7 @@ class Vehicles:
         `vehicle_make_id` via Carbon Interface API.
         :param vehicle_make_id: a (str) representing the ID of a `VehicleMake`.
         :return: a list of `VehicleModel` objects.
-        :except: RuntimeError if there's a problem when deserializing the response.
+        :raises: RuntimeError if there's a problem when deserializing the response.
         """
         client: Client = Client()
         response_str: str = client.get(
