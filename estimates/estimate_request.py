@@ -4,8 +4,6 @@ Module estimate_request
 
 from typing import Any
 
-import json_fix
-
 from client import BaseRequest
 
 from .estimate_type import EstimateType
@@ -24,4 +22,13 @@ class EstimateRequest(BaseRequest):
         self.type = estimate_type
 
     def __json__(self) -> dict[str, Any]:
-        return {k: v for k, v in self.__dict__.items() if v is not None}
+        response = {}
+        for k, v in self.__dict__.items():
+            if v:
+                if isinstance(v, list):
+                    response[k] = [elem.__json__() for elem in v]
+                elif v.__class__ in (int, float, bool):
+                    response[k] = v
+                else:
+                    response[k] = v.__str__()
+        return response

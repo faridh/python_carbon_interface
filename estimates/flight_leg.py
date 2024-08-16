@@ -1,10 +1,7 @@
 """
 Module flight_leg
 """
-
 from typing import Any
-
-import json_fix
 
 from model.cabin_class import CabinClass
 
@@ -37,5 +34,12 @@ class FlightLeg:
         self.destination_airport = destination_airport.lower()
         self.cabin_class = cabin_class
 
+    def __repr__(self) -> str:
+        return (f"FlightLeg('{self.departure_airport}', "
+                f"'{self.destination_airport}', "
+                f"{self.cabin_class})")
+
     def __json__(self) -> dict[str, Any]:
-        return self.__dict__
+        return {'departure_airport': self.departure_airport,
+                'destination_airport': self.destination_airport,
+                'cabin_class': self.cabin_class.__str__()}

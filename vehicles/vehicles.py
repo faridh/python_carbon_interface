@@ -47,7 +47,6 @@ class Vehicles:
         response_str: str = client.get(
             f"vehicle_makes/{vehicle_make_id}/vehicle_models"
         )
-        print(response_str)
         try:
             data: list[dict[str, Any]] = json.loads(response_str)
             response = [VehicleModel(d.get("data")) for d in data]

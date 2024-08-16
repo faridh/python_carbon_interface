@@ -4,8 +4,6 @@ Module estimate_type
 
 from enum import Enum
 
-import json_fix
-
 
 class EstimateType(Enum):
     """
@@ -18,5 +16,8 @@ class EstimateType(Enum):
     VEHICLE = "vehicle"
     FUEL_COMBUSTION = "fuel_combustion"
 
-    def __json__(self) -> str:
+    def __repr__(self) -> str:
+        return f"EstimateType('{self.value}')"
+
+    def __str__(self) -> str:
         return self.value

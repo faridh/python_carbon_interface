@@ -3,7 +3,7 @@ Module estimate_response_factory
 """
 
 import json
-from typing import Any, TypeVar
+from typing import Any
 
 from .electricity_estimate_response import ElectricEstimateResponse
 from .estimate_response import EstimateResponse
@@ -19,17 +19,15 @@ class EstimateResponseFactory:
     given the API response.
     """
 
-    T: TypeVar = TypeVar("T", bound=EstimateResponse)
-
     @staticmethod
-    def from_json(data: dict[str, Any]) -> T:
+    def from_json(data: dict[str, Any]) -> EstimateResponse:
         """
         Deserializes an EstimateResponse instance based on
         the contents of data
         :param data: the data that represents an EstimateResponse.
         :return: an EstimateResponse instance.
         """
-        attributes: dict[str, Any] | None | Any = data.get("attributes")
+        attributes: dict[str, Any] = data.get("attributes", {})
         if "electricity_value" in attributes:
             return ElectricEstimateResponse(data)
         if "passengers" in attributes:

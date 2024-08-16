@@ -23,7 +23,7 @@ class FlightEstimateRequest(EstimateRequest):
         self,
         passengers: int,
         legs: list[FlightLeg],
-        distance_unit: DistanceUnit | None = DistanceUnit.KM,
+        distance_unit: DistanceUnit = DistanceUnit.KM,
     ):
         super().__init__(EstimateType.FLIGHT)
         self.passengers = passengers

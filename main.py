@@ -2,19 +2,23 @@
 Module main
 """
 
-import json
 
 from estimates import (
     ElectricityEstimateRequest,
+    Estimates,
     FlightEstimateRequest,
     FlightLeg,
+    FuelCombustionEstimateRequest,
     ShippingEstimateRequest,
+    VehicleEstimateRequest,
 )
 from model import (
     CabinClass,
     Country,
     DistanceUnit,
     ElectricityUnit,
+    FuelSourceType,
+    FuelSourceUnit,
     TransportMethod,
     WeightUnit,
 )
@@ -24,7 +28,8 @@ if __name__ == "__main__":
     electric_request = ElectricityEstimateRequest(
         country=Country.US, electricity_value=42, electricity_unit=ElectricityUnit.MWH
     )
-    print(json.dumps(electric_request))
+    # print(electric_request.__json__())
+    print(Estimates.create_estimate_request(electric_request))
 
     flight_request = FlightEstimateRequest(
         passengers=2,
@@ -34,7 +39,8 @@ if __name__ == "__main__":
         ],
         distance_unit=DistanceUnit.KM,
     )
-    print(json.dumps(flight_request))
+    # print(flight_request.__json__())
+    print(Estimates.create_estimate_request(flight_request))
 
     shipping_request = ShippingEstimateRequest(
         weight_unit=WeightUnit.GRAMS,
@@ -43,7 +49,21 @@ if __name__ == "__main__":
         distance_value=2000,
         transport_method=TransportMethod.TRUCK,
     )
-    print(json.dumps(shipping_request))
+    # print(shipping_request.__json__())
+    print(Estimates.create_estimate_request(shipping_request))
 
-    # response = Estimates.create_estimate_request(shipping_request)
-    # print(response)
+    vehicle_request = VehicleEstimateRequest(
+        distance_unit=DistanceUnit.MI,
+        distance_value=100,
+        vehicle_model_id="7268a9b7-17e8-4c8d-acca-57059252afe9",
+    )
+    # print(vehicle_request.__json__())
+    print(Estimates.create_estimate_request(vehicle_request))
+
+    fuel_request = FuelCombustionEstimateRequest(
+        fuel_source_type=FuelSourceType.HOME_HEATING_DIESEL_FUEL,
+        fuel_source_unit=FuelSourceUnit.BTU,
+        fuel_source_value=2,
+    )
+    # print(fuel_request.__json__())
+    print(Estimates.create_estimate_request(fuel_request))

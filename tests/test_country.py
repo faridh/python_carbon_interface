@@ -2,7 +2,6 @@
 Module test_country
 """
 
-import json
 import unittest
 
 from model import Country
@@ -29,14 +28,6 @@ class TestCountry(unittest.TestCase):
 
         subject_2: Country = Country.from_value("eu27+1")
         self.assertEqual(subject_2, Country.EU27_1)
-
-    def test_should_serialize_successfully(self) -> None:
-        """
-        Tests that Country serializes proper to JSON.
-        """
-        country: Country = Country.from_value("fr")
-        subject: dict[str, Country] = {"country": country}
-        self.assertEqual(json.dumps(subject), '{"country": "fr"}')
 
     def test_should_throw_exception(self) -> None:
         """

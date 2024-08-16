@@ -24,7 +24,7 @@ class ElectricityEstimateRequest(EstimateRequest):
         country: Country,
         electricity_value: float,
         electricity_unit: ElectricityUnit = ElectricityUnit.MWH,
-        state: str = None,
+        state: str | None = None,
     ):
         super().__init__(EstimateType.ELECTRICITY)
         self.electricity_unit = electricity_unit

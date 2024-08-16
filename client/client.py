@@ -9,8 +9,6 @@ import requests
 from requests.adapters import HTTPAdapter
 from urllib3 import Retry
 
-from .base_request import BaseRequest
-
 
 class Client:
     """
@@ -21,7 +19,7 @@ class Client:
     DEFAULT_TIMEOUT: int = 10
     instance = None
 
-    def __init__(self):
+    def __init__(self) -> None:
         api_key: str | None = os.getenv("CARBON_INTERFACE_API_KEY")
         if not api_key:
             raise RuntimeError("CARBON_INTERFACE_API_KEY is not defined")
@@ -56,16 +54,16 @@ class Client:
         except IOError as exc:
             raise RuntimeError("Could not execute the GET request.") from exc
 
-    def post(self, endpoint: str, data: BaseRequest) -> str:
+    def post(self, endpoint: str, json_data: dict[str, Any]) -> str:
         """
         Executes a POST call to Carbon Interface API.
         :param endpoint: the final endpoint for the request, i.e.: 'estimates'
-        :param data: the data to be sent as the Request body.
+        :param json_data: the data to be sent as the Request body.
         :raises: RuntimeError: when the request can't be completed.
         """
         full_api_url: str = f"{self.__api_base_url}/{endpoint}"
         try:
-            response = self.__post_with_retries(full_api_url, data)
+            response = self.__post_with_retries(full_api_url, json_data)
             if response.status_code in {200, 201}:
                 return response.text
 
@@ -96,7 +94,7 @@ class Client:
         except IOError as e:
             raise RuntimeError("GET failed.") from e
 
-    def __post_with_retries(self, url: str, data: Any) -> requests.Response:
+    def __post_with_retries(self, url: str, json_data: dict[str, Any]) -> requests.Response:
         response: requests.Response | None
         try:
             retry_conf = Retry(
@@ -112,7 +110,7 @@ class Client:
             response = session.post(
                 url,
                 headers=self.__default_headers,
-                json=data,
+                json=json_data,
                 timeout=Client.DEFAULT_TIMEOUT,
             )
             return response

@@ -4,8 +4,6 @@ Module weight_unit
 
 from enum import Enum
 
-import json_fix
-
 
 class WeightUnit(Enum):
     """
@@ -21,7 +19,4 @@ class WeightUnit(Enum):
         return f"WeightUnit('{self.value}')"
 
     def __str__(self):
-        return self.__repr__()
-
-    def __json__(self) -> str:
         return self.value

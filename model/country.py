@@ -4,8 +4,6 @@ Module country
 
 from enum import Enum
 
-import json_fix
-
 
 class Country(Enum):
     """
@@ -71,7 +69,4 @@ class Country(Enum):
         return f"Country('{self.value[0]}')"
 
     def __str__(self):
-        return self.__repr__()
-
-    def __json__(self) -> str:
         return self.value[0]

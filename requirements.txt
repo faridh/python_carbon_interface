@@ -8,7 +8,6 @@ dill==0.3.8
 idna==3.7
 iniconfig==2.0.0
 isort==5.13.2
-json-fix==1.0.0
 mccabe==0.7.0
 mypy==1.11.1
 mypy-extensions==1.0.0
